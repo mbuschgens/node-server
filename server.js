@@ -1,13 +1,19 @@
-/// THOSE ARE FOR SECURE HTTPS VERSION
+// first add github repositories
+// copy clone link
+// open terminal local
+// goto working directory
+// git clone <clone link>
+// cd project directory
+// code .
 
-/// no apt-get on mac? follow the steps
+/// no apt-get on mac? install homebrew eand open all will brew instaal <name>
+/// follow the steps
+
 // instal xcode
 // ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 // brew install wget
 // echo 'export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"' >> ~/.profile
 // brew install python
-
-// ??? replace  apt-get with brrew : sudo apt-get install nodejs-legacy
 // brew install nodejs
 
 /// optional not special needed // sudo npm install pm2 -g
@@ -15,20 +21,19 @@
 // sudo npm install -g nodemon
 // sudo npm i npm@latest -g
 // sudo npm install -g n
-/// sudo n latest
 // PATH="$PATH"
 // sudo npm install socket.io
 // sudo npm install fs -g
 // sudo npm install express -g
 
-/// for macos brew install certbot
-/// replace > sudo apt-get install certbot -y
 // brew install certbot
 
 // npm i greenlock
 
+/// Push all new files to github
+
 // git add .
-// git commit - m "discription"
+// git commit - m "<discription>"
 // git push origin HEAD
 
 /// on server create ssl certs and key
