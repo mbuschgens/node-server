@@ -38,3 +38,7 @@ Node-socket-server
 // git add .
 // git commit - m "<discription>"
 // git push origin HEAD
+
+// docker
+// docker build --tag pemworld/node-server:1.0 .
+// docker run --publish 3000:3000 --detach --name node-server pemworld/node-server:1.0

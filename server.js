@@ -36,6 +36,10 @@
 // git commit - m "<discription>"
 // git push origin HEAD
 
+// docker
+// docker build --tag pemworld/node-server:1.0 .
+// docker run --publish 3000:3000 --detach --name node-server pemworld/node-server:1.0
+
 /// on server create ssl certs and key
 
 // sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -out /etc/ssl/certs/server.crt -keyout /etc/ssl/certs/server.key
