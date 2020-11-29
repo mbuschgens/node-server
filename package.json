@@ -1,0 +1,30 @@
+{
+  "name": "socket-server",
+  "version": "1.0.0",
+  "description": "Node-socket-server",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon ./server.js --exec"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "greenlock": "^4.0.4",
+    "nodemon": "^2.0.2",
+    "pstree.remy": "^1.1.0",
+    "socket.io": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbuschgens/node-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mbuschgens/node-server/issues"
+  },
+  "homepage": "https://github.com/mbuschgens/node-server#readme"
+}
