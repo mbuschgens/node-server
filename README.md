@@ -28,6 +28,7 @@ Node-socket-server
 // sudo npm install socket.io
 // sudo npm install fs -g
 // sudo npm install express -g
+// npm install mysql
 
 // brew install certbot
 
@@ -42,3 +43,6 @@ Node-socket-server
 // docker
 // docker build --tag pemworld/node-server:1.0 .
 // docker run --publish 3000:3000 --detach --name node-server pemworld/node-server:1.0
+
+// docker container exec -it <nameYouGive> bash
+// docker container run -d -p 3306:3306 --name mysql --env MYSQL_ROOT_PASSWORD=123456 mysql

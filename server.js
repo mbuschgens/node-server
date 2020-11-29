@@ -25,6 +25,7 @@
 // sudo npm install socket.io
 // sudo npm install fs -g
 // sudo npm install express -g
+// npm install mysql
 
 // brew install certbot
 
@@ -39,6 +40,9 @@
 // docker
 // docker build --tag pemworld/node-server:1.0 .
 // docker run --publish 3000:3000 --detach --name node-server pemworld/node-server:1.0
+
+// docker container exec -it <nameYouGive> bash
+// docker container run -d -p 3306:3306 --name mysql --env MYSQL_ROOT_PASSWORD=123456 mysql
 
 /// on server create ssl certs and key
 
@@ -101,6 +105,29 @@ let usersrNames = {};
 let connections = [];
 let users = [];
 
+// make msql connection
+
+let mysql = require("mysql");
+let db = "node-server";
+
+let con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "askl7410",
+  database: db,
+});
+
+con.connect(function (err) {
+  if (err) throw err;
+  console.log("Connected! to Mysql database : ", db);
+  let sql = "SELECT * FROM connections";
+  con.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    console.log("Result: ");
+    console.log(result);
+  });
+});
+
 io.on("connection", (socket) => {
   let room = socket.handshake["query"]["room"];
   let email = socket.handshake["query"]["email"];
@@ -136,12 +163,11 @@ io.on("connection", (socket) => {
     });
     if (index !== -1) users.splice(index, 1);
 
-    // users.splice(
-    //   users.findIndex(function (v) {
-    //     return v.userEmail === email;
-    //   }),
-    //   1
-    // );
+    let sqldelete = "DELETE FROM connections WHERE userEmail = '" + email + "'";
+    con.query(sqldelete, function (err, result) {
+      if (err) throw err;
+      console.log("Number of records deleted: " + result.affectedRows);
+    });
 
     console.log("*** Overview after one REMOVED connection *** : " + email);
     console.log(" %s total sockets connected", connections.length);
@@ -161,12 +187,12 @@ io.on("connection", (socket) => {
     });
     if (index !== -1) users.splice(index, 1);
 
-    // users.splice(
-    //   users.findIndex(function (v) {
-    //     return v.userEmail === userEmail;
-    //   }),
-    //   1
-    // );
+    let sqldelete =
+      "DELETE FROM connections WHERE userEmail = '" + userEmail + "'";
+    con.query(sqldelete, function (err, result) {
+      if (err) throw err;
+      console.log("Number of records deleted: " + result.affectedRows);
+    });
 
     connections.splice(connections.indexOf(socket), 1);
 
@@ -184,16 +210,35 @@ io.on("connection", (socket) => {
     let userEmail = data.email;
     let usersocketId = data.socketId;
 
+    // delete old
     let index = users.findIndex(function (o) {
       return o.userEmail === userEmail;
     });
     if (index !== -1) users.splice(index, 1);
+    // delete old mysql
+    let sqldelete =
+      "DELETE FROM connections WHERE userEmail = '" + userEmail + "'";
+    con.query(sqldelete, function (err, result) {
+      if (err) throw err;
+      console.log("Number of records deleted: " + result.affectedRows);
+    });
 
     const usersNames = { userEmail, usersocketId }; //create a user object to go in the array
     users.push(usersNames); //put it on the end of the array
+    let sqlinsert =
+      "INSERT INTO connections (userEmail, usersocketId) VALUES ('" +
+      userEmail +
+      "', '" +
+      usersocketId +
+      "')";
+    con.query(sqlinsert, function (err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+    });
 
     console.log("*** Overview all connections ***");
     console.log(users);
+
     //console.log('userCount: ' + userCount);
     // io.emit("connectedUsers", usersNames);
   });
