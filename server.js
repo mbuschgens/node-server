@@ -27,6 +27,10 @@
 
 // npm i greenlock
 
+// git add .
+// git commit - m "discription"
+// git push origin HEAD
+
 /// on server create ssl certs and key
 
 // sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -out /etc/ssl/certs/server.crt -keyout /etc/ssl/certs/server.key
